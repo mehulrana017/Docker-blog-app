@@ -10,4 +10,13 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+      - MONGO_USER=mehul
+      - MONGO_PASSWORD=mypassword
+      - MONGO_IP=mongo
+      - MONGO_PORT=27017
     command: npm run dev
+
+  mongo:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mehul
+      - MONGO_INITDB_ROOT_PASSWORD=mypassword
