@@ -9,9 +9,7 @@ const {
   MONGO_PASSWORD,
   MONGO_USER,
   PORT,
-  REDIS_URL,
   SESSION_SECRET,
-  REDIS_PORT,
 } = envs;
 
 //Redis
@@ -52,6 +50,7 @@ const connectWithRetry = () => {
 connectWithRetry();
 
 //Middleware
+app.enable("trust proxy");
 app.use(
   session({
     store: new RedisStore({ client: redisClient }),
@@ -61,14 +60,15 @@ app.use(
       resave: false,
       saveUninitialized: false,
       httpOnly: true,
-      maxAge: 30000,
+      maxAge: 60000,
     },
   })
 );
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/api/v1", (req, res) => {
   res.send("<h2>Hi There!!!</h2>");
+  console.log("yeah it ran");
 });
 
 //Router
