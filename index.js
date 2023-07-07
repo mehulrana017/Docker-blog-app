@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 
 //Environment Variables
 import { envs } from "./conifg/config.js";
@@ -51,6 +52,7 @@ connectWithRetry();
 
 //Middleware
 app.enable("trust proxy");
+app.use(cors());
 app.use(
   session({
     store: new RedisStore({ client: redisClient }),
