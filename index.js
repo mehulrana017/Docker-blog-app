@@ -4,14 +4,7 @@ import cors from "cors";
 
 //Environment Variables
 import { envs } from "./conifg/config.js";
-const {
-  MONGO_IP,
-  MONGO_PORT,
-  MONGO_PASSWORD,
-  MONGO_USER,
-  PORT,
-  SESSION_SECRET,
-} = envs;
+const { MONGO_IP, MONGO_PORT, PORT, SESSION_SECRET } = envs;
 
 //Redis
 import RedisStore from "connect-redis";
@@ -35,7 +28,7 @@ import authRouter from "./routes/userRoute.js";
 const app = express();
 
 //Mongo
-const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
+const mongoURL = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
 const connectWithRetry = () => {
   mongoose
     .connect(mongoURL, {
