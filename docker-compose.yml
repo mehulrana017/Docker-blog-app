@@ -9,6 +9,7 @@ services:
 
   node-app:
     build: .
+    image: mehulrana017/node-docker
     environment:
       - PORT=3000
     depends_on:
